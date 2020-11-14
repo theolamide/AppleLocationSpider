@@ -18,7 +18,6 @@ for i in range(0, len(toLook)):
         "City": "",
         "State": "",
         "Zip": "",
-        "Area Code"
         "Phone": "",
     }
     individualLink = toLook[i]
@@ -41,8 +40,8 @@ for i in range(0, len(toLook)):
                 singleAddress["City"] = splitSingleAddress[0]
                 singleAddress["State"] = splitSingleAddress[1]
                 singleAddress["Zip"] = splitSingleAddress[2]
-                singleAddress["Area Code"] = splitSingleAddress[3]
-                singleAddress["Phone"] = splitSingleAddress[4]
+                # singleAddress["Area Code"] = splitSingleAddress[3]
+                singleAddress["Phone"] = splitSingleAddress[3] + '-' + splitSingleAddress[4]
             elif len(splitSingleAddress) > 5:
                 City = ""
                 for z in range(0, len(splitSingleAddress[:-4])):
@@ -50,8 +49,7 @@ for i in range(0, len(toLook)):
                 singleAddress["City"] = City.strip(", ")
                 singleAddress["State"] = splitSingleAddress[-4]
                 singleAddress["Zip"] = splitSingleAddress[-3]
-                singleAddress["Area Code"] = splitSingleAddress[-2]
-                singleAddress["Phone"] = splitSingleAddress[-1]
+                singleAddress["Phone"] = splitSingleAddress[-2] + '-' + splitSingleAddress[-1]
         else:
             singleAddress["Street Address"] = splitSingleAddress
 
@@ -60,9 +58,9 @@ for i in range(0, len(toLook)):
 
 # print(collectedAddresses)
 csvFile = open('AppleStoreAddresses.csv', 'w')
-fieldNames = ["Street Address", "City", "State", "Zip", "Area Code", "Phone", "Area CodePhone"]
+fieldNames = ["Street Address", "City", "State", "Zip", "Phone"]
 with csvFile as exportCsv:
-    writer = csv.DictWriter(exportCsv, fieldnames=fieldNames)
+    writer = csv.DictWriter(exportCsv, lineterminator='\n', fieldnames=fieldNames)
     writer.writeheader()
     for element in collectedAddresses:
         writer.writerow(element)
