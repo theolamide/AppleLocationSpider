@@ -2,13 +2,16 @@ import requests
 import re
 import csv
 
-from requests.models import Response
+# from requests.models import Response
 
 r = requests.get('https://www.apple.com/retail/storelist/')
 rResponse = r.text.encode("utf-8")
 
-toLook = re.findall(r'https://www.apple.com/retail/\w+', rResponse)[3:]
+toLook = re.findall(r'https://www.apple.com/retail/\w+', rResponse, flags=re.S | re.I)[3:]
 clean = re.compile('<.*?>')
+
+# print(toLook[1][29:])
+# print(toLook[1][:29])
 collectedAddresses = []
 # loop through resulting array and set individual store i
 for i in range(0, len(toLook)):
