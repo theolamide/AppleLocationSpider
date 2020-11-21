@@ -6,6 +6,7 @@ import csv
 
 r = requests.get('https://www.apple.com/retail/storelist/')
 rResponse = r.text.encode("utf-8")
+# print(rResponse)
 
 toLook = re.findall(r'https://www.apple.com/retail/\w+', rResponse, flags=re.S | re.I)[3:]
 clean = re.compile('<.*?>')
