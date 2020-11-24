@@ -29,3 +29,23 @@ rResponse = r.content
 resJson = json.loads(rResponse)
 
 print(len(resJson["data"]["galleries"]))
+
+stores = resJson["data"]["galleries"]
+if not stores:
+    raise Exception("Failed to find stores")
+
+for store in stores:
+    address = store['address']
+
+    latitude = address['latitude']
+    longitude = address['longitude']
+
+    site_id = store['docId']
+    name = store['name']
+
+    street = address['streetLine1']
+    city = address['city']
+    state = address['state']
+    zip_code = address['postalCode']
+
+    phone = store['phoneNumber']
